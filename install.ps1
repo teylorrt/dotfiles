@@ -1,7 +1,7 @@
 
 $userDotFiles = "$HOME\dotfiles\dot-posh\"
 $dotPoshUtils = "$userDotFiles\utils.ps1"
-$dotPoshScript = "$userDotFiles\dot-posh.ps1"
+$installDotPoshScript = "$userDotFiles\install-dot-posh.ps1"
 $dotPoshFiles = "dotfiles\*"
 
 if (!(Get-Item $userDotFiles -errorAction SilentlyContinue)) {
@@ -10,4 +10,13 @@ if (!(Get-Item $userDotFiles -errorAction SilentlyContinue)) {
 
 Copy-Item -Path $dotPoshFiles -Destination $userDotFiles -Recurse
 
-#$dotPoshScript | Invoke-Expression
+# load utils
+. $dotPoshUtils
+
+# install Dot Posh
+#. $installDotPoshScript
+
+Copy-Item "dot-posh.ps1" -Destination $HOME
+
+# reload profile
+. $PROFILE
