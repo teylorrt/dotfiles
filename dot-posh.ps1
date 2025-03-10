@@ -2,7 +2,7 @@ $global:DOT_POSH_FILES = "$HOME\dotfiles\dot-posh\"
 $global:DOT_POSH = "$HOME\dot-posh.ps1"
 
 # load utils
-. "$DOT_POSH_FILES\utils.ps1"
+. "$DOT_POSH_FILES\commands.ps1"
 
 # load aliases
 . "$DOT_POSH_FILES\aliases.ps1"
@@ -17,4 +17,5 @@ fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
 Import-Module PSReadLine
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineKeyHandler -Chord "Tab" -Function HistorySearchForward 
 

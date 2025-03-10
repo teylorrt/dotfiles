@@ -1,20 +1,18 @@
 
 $userDotFiles = "$HOME\dotfiles\dot-posh\"
-$dotPoshUtils = "$userDotFiles\utils.ps1"
-$installDotPoshScript = "$userDotFiles\install-dot-posh.ps1"
-$dotPoshFiles = "dotfiles\*"
 
 if (!(Get-Item $userDotFiles -errorAction SilentlyContinue)) {
     New-Item -ItemType Directory -Path $userDotFiles -Force
 }
 
-Copy-Item -Path $dotPoshFiles -Destination $userDotFiles -Recurse
+# copy dotfiles
+Copy-Item -Path "dotfiles\*" -Destination $userDotFiles -Recurse
 
 # load utils
-. $dotPoshUtils
+. ".\install\utils.ps1"
 
 # install Dot Posh
-#. $installDotPoshScript
+#. ".\install\install-dot-posh.ps1"
 
 Copy-Item "dot-posh.ps1" -Destination $HOME
 

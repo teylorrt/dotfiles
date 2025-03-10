@@ -1,16 +1,5 @@
-if($utilsLoaded) {
-    Write-Output "utils loaded"
+if($commandsLoaded) {
     exit
-}
-Write-Output "loading utils"
-
-$global:DOT_POSH_FILES = "$HOME\dotfiles\dot-posh\"
-$global:DOT_POSH = "$HOME\dot-posh.ps1"
-
-function global:checkCommand {
-    param($commandName)
-
-    (Get-Command $commandName -errorAction SilentlyContinue)
 }
 
 function global:invokeExpression {
@@ -29,4 +18,4 @@ function global:setAlias {
     invokeExpression($func);
 }
 
-$global:utilsLoaded = $true
+$global:commandsLoaded = $true
