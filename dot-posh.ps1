@@ -13,8 +13,11 @@ oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\half-life.omp.json" | Invok
 # init fnm
 fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
 
-### Command History ###
+# Import PowerShell plugins
+Import-Module "Terminal-Icons"
 Import-Module PSReadLine
+
+### Enable command history ###
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineKeyHandler -Chord "Tab" -Function HistorySearchForward 

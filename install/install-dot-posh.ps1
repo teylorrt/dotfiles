@@ -48,10 +48,5 @@ if($installFont -eq "y") {
     ./install-font.ps1
 }
 
-Write-Host "Enabling command history"
-'' | Out-File -Append -Encoding default -FilePath $profile
-'' | Out-File -Append -Encoding default -FilePath $profile
-'### Command History ###' | Out-File -Append -Encoding default -FilePath $profile
-'Import-Module PSReadLine' | Out-File -Append -Encoding default -FilePath $profile
-'Set-PSReadLineOption -PredictionSource History' | Out-File -Append -Encoding default -FilePath $profile
-'Set-PSReadLineOption -PredictionViewStyle ListView' | Out-File -Append -Encoding default -FilePath $profile
+# install Terminal-Icons. https://github.com/devblackops/Terminal-Icons
+Install-Module Terminal-Icons -Scope AllUsers -Force
