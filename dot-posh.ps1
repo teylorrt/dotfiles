@@ -20,5 +20,7 @@ Import-Module PSReadLine
 ### Enable command history ###
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -PredictionViewStyle ListView
-Set-PSReadLineKeyHandler -Chord "Tab" -Function HistorySearchForward 
+
+# Enable "Tab" in history
+#Set-PSReadLineKeyHandler -Chord "Tab" -Function HistorySearchForward 
 
