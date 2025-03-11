@@ -1,6 +1,9 @@
 $global:DOT_POSH_FILES = "$HOME\dotfiles\dot-posh\"
 $global:DOT_POSH = "$HOME\dot-posh.ps1"
 
+# load environment
+. "$DOT_POSH_FILES\environment.ps1"
+
 # load utils
 . "$DOT_POSH_FILES\commands.ps1"
 
