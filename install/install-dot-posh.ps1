@@ -48,5 +48,8 @@ if($installFont -eq "y") {
     ./install-font.ps1
 }
 
+# configure terminal settings
+./terminal-settings.ps1
+
 # install Terminal-Icons. https://github.com/devblackops/Terminal-Icons
 Install-Module Terminal-Icons -Scope AllUsers -Force

@@ -1,6 +1,3 @@
-$settingPath = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-$terminalSettings = Get-Content -Raw $settingPath | ConvertFrom-Json
-
 Write-Host "Install font. Suggestion: Meslo"
 if($null -ne $terminalSettings.profiles.defaults.font) {
     $terminalSettings.profiles.defaults.font = '{}' | ConvertFrom-Json

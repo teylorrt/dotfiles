@@ -15,4 +15,8 @@ function global:invokeExpression {
     $command | Invoke-Expression
 }
 
+## terminal settings
+$global:terminalSettingsPath = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+$global:terminalSettings = Get-Content -Raw $terminalSettingsPath | ConvertFrom-Json
+
 $global:utilsLoaded = $true
