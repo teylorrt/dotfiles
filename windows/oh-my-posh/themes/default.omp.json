@@ -1,13 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "pwd": "osc99",
-  "console_title_template": "{{.Folder}}",
+  "console_title_template": "{{.PWD}}",
   "blocks": [
     {
       "alignment": "left",
       "segments": [
         {
-          "foreground": "#7E46B6",
+          "foreground": "#87FF00",
           "style": "plain",
           "template": "{{ .UserName }} ",
           "type": "session"
@@ -19,19 +19,29 @@
           "type": "text"
         },
         {
-          "foreground": "#87FF00",
+          "foreground": "#56B6C2",
           "properties": {
-            "folder_icon": "..\ue5fe..",
             "home_icon": "~",
-            "max_depth": 2,
-            "style": "agnoster_short"
+            "style": "folder"
           },
           "style": "plain",
           "template": "{{ .Path }} ",
           "type": "path"
         },
         {
-          "foreground": "#5FD7FF",
+          "foreground": "#61AFEF",
+          "style": "plain",
+          "template": "{{ if .Env.HAS_DOT_NET }}<#ffffff>via</> .NET v{{ .Env.DOT_NET_VERSON }} {{ end }}",
+          "type": "text"
+        },
+        {
+          "foreground": "#98C379",
+          "style": "plain",
+          "template": "{{ if .Env.HAS_NODE }}<#ffffff>via</> \ued0d {{ .Env.NODE_VERSION }} {{ end }}",
+          "type": "text"
+        },
+        {
+          "foreground": "#C678DD",
           "properties": {
             "branch_ahead_icon": "",
             "branch_behind_icon": "",
@@ -48,11 +58,11 @@
             "tag_icon": "\uf412 "
           },
           "style": "plain",
-          "template": "{{ .HEAD }}{{ if .Staging.Changed }}<#87FF00> \uf044 {{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }}<#D75F00> \uf044 {{ .Working.String }}</>{{ end }} ",
+          "template": "{{ .HEAD }}{{ if .Staging.Changed }}<#C678DD> \uf044 {{ .Staging.String }}</>{{ end }}{{ if .Working.Changed }}<#E5C07B> \uf044 {{ .Working.String }}</>{{ end }} ",
           "type": "git"
         },
         {
-          "foreground": "#D75F00",
+          "foreground": "#E06C75",
           "style": "plain",
           "template": "λ ",
           "type": "text"

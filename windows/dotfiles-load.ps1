@@ -11,6 +11,22 @@ $global:OH_MY_POSH_TEMES = "$HOME\oh-my-posh\themes"
 # load aliases
 . "$DOT_FILES\aliases.ps1"
 
+# set custom env vars to be used in theme
+function Set-EnvVar([bool]$originalStatus) {
+
+    if (checkCommand("dotnet")) {
+        $env:HAS_DOT_NET=$true
+        $env:DOT_NET_VERSON=$(dotnet --version)
+    }
+
+    if (checkCommand("node")) {
+        $env:HAS_NODE=$true
+        $env:NODE_VERSION=$(node --version)
+    }
+}
+
+New-Alias -Name 'Set-PoshContext' -Value 'Set-EnvVar' -Scope Global -Force
+
 # init oh-my-posh
 oh-my-posh init pwsh --config "$OH_MY_POSH_TEMES\default.omp.json" | Invoke-Expression
 
