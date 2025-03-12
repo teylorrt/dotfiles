@@ -26,7 +26,3 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 
 # Enable "Tab" in history
 #Set-PSReadLineKeyHandler -Chord "Tab" -Function HistorySearchForward 
-
-# Set window title
-#$Host.UI.RawUI.WindowTitle = Split-Path -Path (Get-Location) -Leaf
-
