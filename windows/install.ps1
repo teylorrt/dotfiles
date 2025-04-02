@@ -1,24 +1,90 @@
 
+$installFilesFolder = "$HOME\teylor-dotfiles-install"
 $userDotFiles = "$HOME\dotfiles"
-$ohMyPoshFolder = "oh-my-posh"
+$ohMyPoshThemesFolder = "$HOME\oh-my-posh\themes"
+$baseUri = "https://raw.githubusercontent.com/teylorrt/dotfiles/refs/heads/main"
 
-if (!(Get-Item $userDotFiles -errorAction SilentlyContinue)) {
-    New-Item -ItemType Directory -Path $userDotFiles -Force
+function ensureFolder {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$folder
+    )
+
+    if (!(Get-Item $folder -errorAction SilentlyContinue)) {
+        New-Item -ItemType Directory -Path $folder -Force
+    }
+
+    Write-Host "Folder $folder created successfully."
 }
 
-# copy dotfiles
-Copy-Item -Path "dotfiles\*" -Destination $userDotFiles -Recurse
+function downloadFiles {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$path,
+        [Parameter(Mandatory=$true)]
+        [string[]]$files,
+        [Parameter(Mandatory=$true)]
+        [string]$destinationFolder,
+        [string]$extension = "ps1"
+    )
+    # Download files
+    Write-Host "Downloading $path files..."
+    foreach ($fileName in $files) {
+        $uri = "$baseUri/$path/$fileName.$extension"
+        Invoke-WebRequest -Uri $uri -OutFile $destinationFolder -UseBasicParsing
+        Write-Host "Downloaded $uri"
+    }
+}
 
-# copy oh-my-posh files
-Copy-Item -Path "$ohMyPoshFolder\*" -Destination "$HOME\$ohMyPoshFolder" -Recurse
+[string[]]$foldersToEnsure = @(
+    $userDotFiles, 
+    $installFilesFolder, 
+    $ohMyPoshThemesFolder
+)
+
+
+# ensure folders
+foreach ($folder in $foldersToEnsure) {
+    ensureFolder $folder
+}
+
+### Download install files ###
+[string[]]$installFiles = @(
+    "install-dotfiles", 
+    "install-font", 
+    "install-node-yarn",
+    "terminal-settings",
+    "utils"
+)
+downloadFiles "windows/install" $installFiles $installFilesFolder
+
+### Download dotfiles ###
+[string[]]$dotfiles = @(
+    "aliases", 
+    "commands", 
+    "environment",
+    "git-config"
+)
+downloadFiles "windows/dotfiles" $dotfiles $userDotFiles
+
+### Download oh-my-posh themes ###
+[string[]]$ohMyPoshThemesFiles = @(
+    "default.omp"
+)
+downloadFiles "windows/oh-my-posh/themes" $ohMyPoshThemesFiles $ohMyPoshThemesFolder "json"
+
+### Download dotfiles-load.ps1 ###
+downloadFiles "windows" "dotfiles-load" $HOME
 
 # load utils
-. ".\install\utils.ps1"
+. "$installFilesFolder\utils.ps1"
 
 # install Dotfiles
-#. ".\install\install-dotfiles.ps1"
+#. "$installFilesFolder\install-dotfiles.ps1"
 
-Copy-Item "dotfiles-load.ps1" -Destination $HOME
+
+Write-Host "Removing install files..."
+Remove-Item -Path $installFolder -Recurse -Force
 
 # reload profile
 . $PROFILE
