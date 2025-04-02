@@ -105,4 +105,4 @@ Remove-Item -Path $installFilesFolder -Recurse -Force
 '. "$HOME\dot-posh.ps1"' | Out-File -Append -Encoding default -FilePath $profile
 
 # reload profile
-. $PROFILE
+pwsh

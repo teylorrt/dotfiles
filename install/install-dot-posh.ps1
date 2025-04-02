@@ -38,4 +38,4 @@ if (!(checkCommand("oh-my-posh"))) {
 . "$installFilesFolder\terminal-settings.ps1"
 
 # install Terminal-Icons. https://github.com/devblackops/Terminal-Icons
-Install-Module Terminal-Icons -Scope AllUsers -Force
+Install-Module Terminal-Icons -Scope CurrentUser -Force
