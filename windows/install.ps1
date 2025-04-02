@@ -84,7 +84,7 @@ downloadFiles "windows" "dotfiles-load" $HOME
 
 
 Write-Host "Removing install files..."
-Remove-Item -Path $installFolder -Recurse -Force
+Remove-Item -Path $installFilesFolder -Recurse -Force
 
 # reload profile
 . $PROFILE
