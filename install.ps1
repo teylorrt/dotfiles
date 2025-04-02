@@ -61,7 +61,7 @@ foreach ($folder in $foldersToEnsure) {
 
 ### Download install files ###
 [string[]]$installFiles = @(
-    "install-dotfiles", 
+    "install-dot-posh", 
     "install-font", 
     "install-node-yarn",
     "terminal-settings",
@@ -69,7 +69,7 @@ foreach ($folder in $foldersToEnsure) {
 )
 downloadFiles "install" $installFiles $installFilesFolder
 
-### Download dotfiles ###
+### Download dot-posh files ###
 [string[]]$dotPoshFiles = @(
     "aliases", 
     "commands", 
