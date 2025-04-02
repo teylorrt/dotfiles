@@ -10,12 +10,7 @@ $global:terminalSettings = Get-Content -Raw $settingPath | ConvertFrom-Json
 $terminalSettings.copyOnSelect = $true;
 
 # install a Nerd Font font
-$installFont = Read-Host "Do you want to install a custom font? (y/n)"
-
-if($installFont -eq "y") {
-    # install font
-    . "$installFilesFolder\install-font.ps1"
-}
+. "$installFilesFolder\install-font.ps1"
 
 
 # update settings file
