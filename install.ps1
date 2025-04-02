@@ -64,7 +64,9 @@ foreach ($folder in $foldersToEnsure) {
     "install-node-yarn.ps1",
     "terminal-settings.ps1",
     "utils.ps1",
-    "dot-posh.omp.json"
+    "dot-posh.omp.json",
+    "install-requirements.ps1",
+    "finalize-install.ps1"
 )
 downloadFiles "install" $installFiles $installFilesFolder
 

@@ -1,4 +1,6 @@
-if(!$utilsLoaded) { ./utils.ps1 }
+$global:installFilesFolder = "$HOME\dot-posh-install"
+
+if(!$utilsLoaded) { . "$installFilesFolder\utils.ps1" }
 
 ##### Install Oh My Posh #### - Reference: https://ohmyposh.dev/docs/installation/windows
 # install using winget

@@ -1,6 +1,6 @@
-if(!$utilsLoaded) { ./utils.ps1 }
-
 $global:installFilesFolder = "$HOME\dot-posh-install"
+
+if(!$utilsLoaded) { . "$installFilesFolder\utils.ps1" }
 
 # install winget - Reference: https://learn.microsoft.com/en-us/windows/package-manager/winget/
 if (!(checkCommand("winget"))) {

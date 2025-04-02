@@ -1,5 +1,7 @@
 $global:installFilesFolder = "$HOME\dot-posh-install"
 
+if(!$utilsLoaded) { . "$installFilesFolder\utils.ps1" }
+
 # configure terminal settings
 . "$installFilesFolder\terminal-settings.ps1"
 
