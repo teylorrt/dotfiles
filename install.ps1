@@ -64,7 +64,7 @@ foreach ($folder in $foldersToEnsure) {
     "install-node-yarn.ps1",
     "terminal-settings.ps1",
     "utils.ps1",
-    $theme
+    "dot-posh.omp.json"
 )
 downloadFiles "install" $installFiles $installFilesFolder
 
@@ -80,24 +80,5 @@ downloadFiles "dot-posh" $dotPoshFiles $dotPoshFolder
 ### Download dot-posh.ps1 ###
 downloadFile "$baseUri/dot-posh.ps1" $HOME
 
-
-# load utils
-. "$installFilesFolder\utils.ps1"
-
-# install Dot-Posh
-. "$installFilesFolder\install-dot-posh.ps1"
-
-# add oh-my-posh theme
-Copy-Item "$installFilesFolder\$theme" -Destination $env:POSH_THEMES_PATH
-
-Write-Host "Removing install files..."
-Remove-Item -Path $installFilesFolder -Recurse -Force
-
-
-## Set initialization of Dot-Posh in profile
-'' | Out-File -Append -Encoding default -FilePath $profile
-'# load Dot-Posh' | Out-File -Append -Encoding default -FilePath $profile
-'. "$HOME\dot-posh.ps1"' | Out-File -Append -Encoding default -FilePath $profile
-
-# reload profile
-pwsh
+# install requirements
+. "$installFilesFolder\install-requirements.ps1"
