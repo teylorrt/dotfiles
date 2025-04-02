@@ -9,7 +9,7 @@ if(!$utilsLoaded) { . "$installFilesFolder\utils.ps1" }
 Install-Module Terminal-Icons -Scope CurrentUser -Force
 
 # add oh-my-posh theme
-Copy-Item "$installFilesFolder\dot-posh.omp.json" -Destination $env:POSH_THEMES_PATH
+Copy-Item "$installFilesFolder\dot-posh.omp.json" -Destination $env:POSH_THEMES_PATH -Force
 
 Write-Host "Removing install files..."
 Remove-Item -Path $installFilesFolder -Recurse -Force
@@ -21,4 +21,4 @@ Remove-Item -Path $installFilesFolder -Recurse -Force
 '. "$HOME\dot-posh.ps1"' | Out-File -Append -Encoding default -FilePath $profile
 
 # reload profile
-pwsh
+. $PROFILE | pwsh
