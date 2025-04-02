@@ -16,5 +16,5 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### Step 3: Execute install script
 ```powershell
-Invoke-RestMethod https://raw.githubusercontent.com/teylorrt/dotfiles/refs/heads/main/windows/install.ps1 | Invoke-Expression
+Invoke-RestMethod https://raw.githubusercontent.com/teylorrt/dotfiles/refs/heads/main/install.ps1 | Invoke-Expression
 ```
