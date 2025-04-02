@@ -1,8 +1,4 @@
 Write-Host "Install font. Suggestion: Meslo"
-if($null -ne $terminalSettings.profiles.defaults.font) {
-    $terminalSettings.profiles.defaults.font = '{}' | ConvertFrom-Json
-}
-$terminalSettings | ConvertTo-Json -Depth 4 | Out-File $settingPath
 oh-my-posh font install
 
 #setting font
@@ -26,5 +22,3 @@ if($null -eq $terminalSettings.profiles.defaults.font) {
         $terminalSettings.profiles.defaults.font.face = $fontName
     }
 }
-
-$terminalSettings | ConvertTo-Json -Depth 4 | Out-File $settingPath

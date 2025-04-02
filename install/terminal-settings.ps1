@@ -1,7 +1,20 @@
 if(!$utilsLoaded) { ./utils.ps1 }
 
+
+$settingPath = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+$global:terminalSettings = Get-Content -Raw $settingPath | ConvertFrom-Json
+
 # enable copyOnSelect
 $terminalSettings.copyOnSelect = $true;
 
-#setting title
-##$Host.UI.RawUI.WindowTitle = Split-Path -Path (Get-Location) -Leaf
+# install a Nerd Font font
+$installFont = Read-Host "Do you want to install a custom font? (y/n)"
+
+if($installFont -eq "y") {
+    # install font
+    . "$installFilesFolder\install-font.ps1"
+}
+
+
+# update settings file
+$terminalSettings | ConvertTo-Json -Depth 4 | Out-File $settingPath

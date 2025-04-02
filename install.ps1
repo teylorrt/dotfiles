@@ -1,5 +1,5 @@
 
-$installFilesFolder = "$HOME\dot-posh-install"
+$global:installFilesFolder = "$HOME\dot-posh-install"
 $dotPoshFolder = "$HOME\dotfiles\dot-posh"
 $ohMyPoshThemesFolder = "$HOME\oh-my-posh\themes"
 $baseUri = "https://raw.githubusercontent.com/teylorrt/dotfiles/refs/heads/main"
@@ -91,12 +91,18 @@ downloadFile "$baseUri/dot-posh.ps1" $HOME
 # load utils
 . "$installFilesFolder\utils.ps1"
 
-# install Dotfiles
-#. "$installFilesFolder\install-dot-posh.ps1"
+# install Dot-Posh
+. "$installFilesFolder\install-dot-posh.ps1"
 
 
 Write-Host "Removing install files..."
 Remove-Item -Path $installFilesFolder -Recurse -Force
+
+
+## Set initialization of Dot-Posh in profile
+'' | Out-File -Append -Encoding default -FilePath $profile
+'# load Dot-Posh' | Out-File -Append -Encoding default -FilePath $profile
+'. "$HOME\dot-posh.ps1"' | Out-File -Append -Encoding default -FilePath $profile
 
 # reload profile
 . $PROFILE
