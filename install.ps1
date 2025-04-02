@@ -1,6 +1,6 @@
 
-$installFilesFolder = "$HOME\teylor-dotfiles-install"
-$userDotFiles = "$HOME\dotfiles"
+$installFilesFolder = "$HOME\dot-posh-install"
+$dotPoshFolder = "$HOME\dotfiles\dot-posh"
 $ohMyPoshThemesFolder = "$HOME\oh-my-posh\themes"
 $baseUri = "https://raw.githubusercontent.com/teylorrt/dotfiles/refs/heads/main"
 
@@ -17,6 +17,18 @@ function ensureFolder {
     Write-Host "Folder $folder created successfully."
 }
 
+function downloadFile {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$uri,
+        [Parameter(Mandatory=$true)]
+        [string]$destinationFolder
+    )
+    
+    Invoke-WebRequest -Uri $uri -OutFile $destinationFolder -UseBasicParsing
+    Write-Host "Downloaded $uri"
+}
+
 function downloadFiles {
     param (
         [Parameter(Mandatory=$true)]
@@ -27,17 +39,16 @@ function downloadFiles {
         [string]$destinationFolder,
         [string]$extension = "ps1"
     )
-    # Download files
+
     Write-Host "Downloading $path files..."
     foreach ($fileName in $files) {
         $uri = "$baseUri/$path/$fileName.$extension"
-        Invoke-WebRequest -Uri $uri -OutFile $destinationFolder -UseBasicParsing
-        Write-Host "Downloaded $uri"
+        downloadFile $uri $destinationFolder
     }
 }
 
 [string[]]$foldersToEnsure = @(
-    $userDotFiles, 
+    $dotPoshFolder, 
     $installFilesFolder, 
     $ohMyPoshThemesFolder
 )
@@ -56,31 +67,32 @@ foreach ($folder in $foldersToEnsure) {
     "terminal-settings",
     "utils"
 )
-downloadFiles "windows/install" $installFiles $installFilesFolder
+downloadFiles "install" $installFiles $installFilesFolder
 
 ### Download dotfiles ###
-[string[]]$dotfiles = @(
+[string[]]$dotPoshFiles = @(
     "aliases", 
     "commands", 
     "environment",
     "git-config"
 )
-downloadFiles "windows/dotfiles" $dotfiles $userDotFiles
+downloadFiles "dot-posh" $dotPoshFiles $dotPoshFolder
 
 ### Download oh-my-posh themes ###
 [string[]]$ohMyPoshThemesFiles = @(
-    "default.omp"
+    "dot-posh.omp"
 )
-downloadFiles "windows/oh-my-posh/themes" $ohMyPoshThemesFiles $ohMyPoshThemesFolder "json"
+downloadFiles "oh-my-posh/themes" $ohMyPoshThemesFiles $ohMyPoshThemesFolder "json"
 
-### Download dotfiles-load.ps1 ###
-downloadFiles "windows" "dotfiles-load" $HOME
+### Download dot-posh.ps1 ###
+downloadFile "$baseUri/dot-posh.ps1" $HOME
+
 
 # load utils
 . "$installFilesFolder\utils.ps1"
 
 # install Dotfiles
-#. "$installFilesFolder\install-dotfiles.ps1"
+#. "$installFilesFolder\install-dot-posh.ps1"
 
 
 Write-Host "Removing install files..."
