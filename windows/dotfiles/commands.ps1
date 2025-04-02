@@ -19,11 +19,19 @@ function global:setAlias {
         [String]$alias, 
         [Parameter(Mandatory=$true)]
         [String]$command,
-        [String]$options
+        [String]$p,
+        [String]$pname
     )
 
-    if($options -eq "-p") {
-        $parameter = 'param ([Parameter(Mandatory=$true)][String]$parameter) _COMMAND_ $parameter'
+    if($p -eq "-p") {
+        $parameterName = "parameter"
+
+        if($pname -ne "") {
+            $parameterName = $pname
+        }
+
+        $parameter = 'param ([Parameter(Mandatory=$true)][String]$_PNAME_) _COMMAND_ $_PNAME_'
+        $parameter = $parameter.Replace("_PNAME_", $parameterName)
         $command = $parameter.Replace("_COMMAND_", $command);
     }
     
