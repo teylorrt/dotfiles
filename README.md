@@ -1,4 +1,5 @@
 # Dot-Posh
+Dot-Posh is a powerful collection of powershell scripts to improve productivity when using Windows Terminal.
 
 ## Requirements
 - PowerShell 7
