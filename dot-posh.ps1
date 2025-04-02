@@ -1,6 +1,6 @@
 $global:DOT_POSH_FILES = "$HOME\dotfiles\dot-posh"
 $global:DOTPOSH = "$HOME\dot-posh.ps1"
-$global:OH_MY_POSH_TEMES = "$HOME\oh-my-posh\themes"
+$global:DOTPOSH_THEME = $env:POSH_THEMES_PATH + "dot-posh.omp.json"
 
 # load environment
 . "$DOT_POSH_FILES\environment.ps1"
@@ -28,7 +28,7 @@ function Set-EnvVar([bool]$originalStatus) {
 New-Alias -Name 'Set-PoshContext' -Value 'Set-EnvVar' -Scope Global -Force
 
 # init oh-my-posh
-oh-my-posh init pwsh --config "$OH_MY_POSH_TEMES\dot-posh.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config $DOTPOSH_THEME | Invoke-Expression
 
 # init fnm
 fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression

@@ -1,8 +1,8 @@
 
 $global:installFilesFolder = "$HOME\dot-posh-install"
 $dotPoshFolder = "$HOME\dotfiles\dot-posh"
-$ohMyPoshThemesFolder = "$HOME\oh-my-posh\themes"
 $baseUri = "https://raw.githubusercontent.com/teylorrt/dotfiles/refs/heads/main"
+$theme = "dot-posh.omp.json"
 
 function ensureFolder {
     param (
@@ -36,21 +36,19 @@ function downloadFiles {
         [Parameter(Mandatory=$true)]
         [string[]]$files,
         [Parameter(Mandatory=$true)]
-        [string]$destinationFolder,
-        [string]$extension = "ps1"
+        [string]$destinationFolder
     )
 
     Write-Host "Downloading $path files..."
     foreach ($fileName in $files) {
-        $uri = "$baseUri/$path/$fileName.$extension"
+        $uri = "$baseUri/$path/$fileName"
         downloadFile $uri $destinationFolder
     }
 }
 
 [string[]]$foldersToEnsure = @(
     $dotPoshFolder, 
-    $installFilesFolder, 
-    $ohMyPoshThemesFolder
+    $installFilesFolder
 )
 
 
@@ -61,28 +59,23 @@ foreach ($folder in $foldersToEnsure) {
 
 ### Download install files ###
 [string[]]$installFiles = @(
-    "install-dot-posh", 
-    "install-font", 
-    "install-node-yarn",
-    "terminal-settings",
-    "utils"
+    "install-dot-posh.ps1", 
+    "install-font.ps1", 
+    "install-node-yarn.ps1",
+    "terminal-settings.ps1",
+    "utils.ps1",
+    $theme
 )
 downloadFiles "install" $installFiles $installFilesFolder
 
 ### Download dot-posh files ###
 [string[]]$dotPoshFiles = @(
-    "aliases", 
-    "commands", 
-    "environment",
-    "git-config"
+    "aliases.ps1", 
+    "commands.ps1", 
+    "environment.ps1",
+    "git-config.ps1"
 )
 downloadFiles "dot-posh" $dotPoshFiles $dotPoshFolder
-
-### Download oh-my-posh themes ###
-[string[]]$ohMyPoshThemesFiles = @(
-    "dot-posh.omp"
-)
-downloadFiles "oh-my-posh/themes" $ohMyPoshThemesFiles $ohMyPoshThemesFolder "json"
 
 ### Download dot-posh.ps1 ###
 downloadFile "$baseUri/dot-posh.ps1" $HOME
@@ -94,6 +87,8 @@ downloadFile "$baseUri/dot-posh.ps1" $HOME
 # install Dot-Posh
 . "$installFilesFolder\install-dot-posh.ps1"
 
+# add oh-my-posh theme
+Copy-Item "$installFilesFolder\$theme" -Destination $env:POSH_THEMES_PATH
 
 Write-Host "Removing install files..."
 Remove-Item -Path $installFilesFolder -Recurse -Force
