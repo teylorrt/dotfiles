@@ -58,13 +58,10 @@ foreach ($folder in $foldersToEnsure) {
 
 ### Download install files ###
 [string[]]$installFiles = @(
-    "install-oh-my-posh.ps1", 
     "install-font.ps1", 
-    "install-node-yarn.ps1",
     "terminal-settings.ps1",
     "utils.ps1",
     "dot-posh.omp.json",
-    "install-requirements.ps1",
     "configure-terminal-settings.ps1"
 )
 downloadFiles "install" $installFiles $installFilesFolder
@@ -78,17 +75,8 @@ downloadFiles "install" $installFiles $installFilesFolder
 )
 downloadFiles "dot-posh" $dotPoshFiles $dotPoshFolder
 
-### Download dot-posh.ps1 ###
-downloadFile "$baseUri/dot-posh.ps1" $HOME
-
-### install requirements
-"$installFilesFolder\install-requirements.ps1" | pwsh
-
-### install oh-my-posh
-"$installFilesFolder\install-oh-my-posh.ps1" | pwsh
-
 ### configure terminal settings
-"$installFilesFolder\configure-terminal-settings.ps1" | pwsh
+. "$installFilesFolder\configure-terminal-settings.ps1"
 
 ### remove install files
 Write-Host "Removing install files..."
@@ -100,5 +88,5 @@ Remove-Item -Path $installFilesFolder -Recurse -Force
 '# load Dot-Posh' | Out-File -Append -Encoding default -FilePath $profile
 '. "$HOME\dot-posh.ps1"' | Out-File -Append -Encoding default -FilePath $profile
 
-### load pwsh
-pwsh
+### reload profile
+. $PROFILE
