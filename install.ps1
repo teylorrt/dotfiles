@@ -84,3 +84,5 @@ downloadFile "$baseUri/dot-posh.ps1" $HOME
 
 # install requirements
 . "$installFilesFolder\install-requirements.ps1"
+
+pwsh
