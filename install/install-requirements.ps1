@@ -18,6 +18,3 @@ if (!(checkCommand("pwsh"))) {
     Write-Output "Installing pwsh"
     winget install --id Microsoft.PowerShell --source winget
 }
-
-# continue to install dot-posh
-"$installFilesFolder\install-dot-posh.ps1" | pwsh

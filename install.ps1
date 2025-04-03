@@ -2,7 +2,6 @@
 $global:installFilesFolder = "$HOME\dot-posh-install"
 $dotPoshFolder = "$HOME\dotfiles\dot-posh"
 $baseUri = "https://raw.githubusercontent.com/teylorrt/dotfiles/refs/heads/main"
-$theme = "dot-posh.omp.json"
 
 function ensureFolder {
     param (
@@ -52,21 +51,21 @@ function downloadFiles {
 )
 
 
-# ensure folders
+### ensure folders
 foreach ($folder in $foldersToEnsure) {
     ensureFolder $folder
 }
 
 ### Download install files ###
 [string[]]$installFiles = @(
-    "install-dot-posh.ps1", 
+    "install-oh-my-posh.ps1", 
     "install-font.ps1", 
     "install-node-yarn.ps1",
     "terminal-settings.ps1",
     "utils.ps1",
     "dot-posh.omp.json",
     "install-requirements.ps1",
-    "finalize-install.ps1"
+    "configure-terminal-settings.ps1"
 )
 downloadFiles "install" $installFiles $installFilesFolder
 
@@ -82,7 +81,24 @@ downloadFiles "dot-posh" $dotPoshFiles $dotPoshFolder
 ### Download dot-posh.ps1 ###
 downloadFile "$baseUri/dot-posh.ps1" $HOME
 
-# install requirements
-. "$installFilesFolder\install-requirements.ps1"
+### install requirements
+"$installFilesFolder\install-requirements.ps1" | pwsh
 
+### install oh-my-posh
+"$installFilesFolder\install-oh-my-posh.ps1" | pwsh
+
+### configure terminal settings
+"$installFilesFolder\configure-terminal-settings.ps1" | pwsh
+
+### remove install files
+Write-Host "Removing install files..."
+Remove-Item -Path $installFilesFolder -Recurse -Force
+
+
+### Set initialization of Dot-Posh in profile
+'' | Out-File -Append -Encoding default -FilePath $profile
+'# load Dot-Posh' | Out-File -Append -Encoding default -FilePath $profile
+'. "$HOME\dot-posh.ps1"' | Out-File -Append -Encoding default -FilePath $profile
+
+### load pwsh
 pwsh

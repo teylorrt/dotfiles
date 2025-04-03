@@ -11,6 +11,3 @@ if (!(checkCommand("oh-my-posh"))) {
     # set bin to PATH
     $env:Path += ";$($HOME)\AppData\Local\Programs\oh-my-posh\bin"
 }
-
-# finalize install
-"$installFilesFolder\finalize-install.ps1" | pwsh

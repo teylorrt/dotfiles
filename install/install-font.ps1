@@ -2,7 +2,7 @@ Write-Host "Install font. Suggestion: Meslo"
 oh-my-posh font install
 
 #setting font
-$fontName = Read-Host "Adding font to terminal settings. Enter the font name. Use one of the names listed above"
+$fontName = "MesloLGL Nerd Font"
 
 $fontInput = '{ "face":"FONT_NAME" }';
 $fontInput = $fontInput.Replace('FONT_NAME', $fontName)
