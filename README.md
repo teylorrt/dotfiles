@@ -17,7 +17,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```powershell
 winget -v
 ```
--  If you don't have winget install using the following script. Reference: https://learn.microsoft.com/en-us/windows/package-manager/winget/
+-  If not, install using the following script as Administrator. Reference: https://learn.microsoft.com/en-us/windows/package-manager/winget/
 ```powershell
     $progressPreference = 'silentlyContinue'
     Write-Host "Installing WinGet PowerShell module from PSGallery..."
@@ -28,12 +28,19 @@ winget -v
     Write-Host "Done."
 ```
 #### PowerShell 7 (pwsh) - Reference: https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5
+- Check if you have pwsh:
+```powershell
+pwsh --version
+```
+- If not, install using the following script:
 ```powershell
 winget install --id Microsoft.PowerShell --source winget
 ```
 
 ### Step 2: Install oh-my-posh
 - Start a new PowerShell (pwsh) terminal. Note that PowerShell (pwsh) is different from Windows PowerShell (powershell). All differences are explained here: https://learn.microsoft.com/en-us/powershell/scripting/whats-new/differences-from-windows-powershell?view=powershell-7.5
+- <img width="306" alt="image" src="https://github.com/user-attachments/assets/3945e41f-1602-4958-bb1b-89902bf54525" />
+
 - Execute the following script to install OhMyPosh
 ```powershell
 Invoke-RestMethod https://raw.githubusercontent.com/teylorrt/dotposh/refs/heads/main/install-oh-my-posh.ps1 | Invoke-Expression
