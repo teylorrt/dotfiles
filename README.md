@@ -1,5 +1,5 @@
 # Dot-Posh
-Dot-Posh is a powerful collection of powershell scripts to improve productivity when using Windows Terminal.
+Dot-Posh is a powerful collection of powershell scripts to improve productivity when using PowerShell on Windows Terminal.
 
 ## Requirements
 - winget
