@@ -13,32 +13,19 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### Step 1: Install Requirements
 #### winget
-- Check if you have winget:
 ```powershell
-winget -v
+Invoke-RestMethod https://raw.githubusercontent.com/teylorrt/dotposh/refs/heads/main/install-winget.ps1 | Invoke-Expression
 ```
--  If you don't have winget install using the following script. Reference: https://learn.microsoft.com/en-us/windows/package-manager/winget/
+#### PowerShell 7 (pwsh)
 ```powershell
-    $progressPreference = 'silentlyContinue'
-    Write-Host "Installing WinGet PowerShell module from PSGallery..."
-    Install-PackageProvider -Name NuGet -Force | Out-Null
-    Install-Module -Name Microsoft.WinGet.Client -Force -Repository PSGallery | Out-Null
-    Write-Host "Using Repair-WinGetPackageManager cmdlet to bootstrap WinGet..."
-    Repair-WinGetPackageManager
-    Write-Host "Done."
-```
-#### PowerShell 7 (pwsh) - Reference: https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5
-```powershell
-winget install --id Microsoft.PowerShell --source winget
+Invoke-RestMethod https://raw.githubusercontent.com/teylorrt/dotposh/refs/heads/main/install-pwsh.ps1 | Invoke-Expression
 ```
 
-### Step 2: Install oh-my-posh. Reference: https://ohmyposh.dev/docs/installation/windows
+### Step 2: Install oh-my-posh
 - Start a new PowerShell (pwsh) terminal. Note that PowerShell (pwsh) is different from Windows PowerShell (powershell). All differences are explained here: https://learn.microsoft.com/en-us/powershell/scripting/whats-new/differences-from-windows-powershell?view=powershell-7.5
 - Execute the following script to install OhMyPosh
 ```powershell
-winget install JanDeDobbeleer.OhMyPosh -s winget
-# set bin to PATH
-$env:Path += ";$($HOME)\AppData\Local\Programs\oh-my-posh\bin"
+Invoke-RestMethod https://raw.githubusercontent.com/teylorrt/dotposh/refs/heads/main/install-oh-my-posh.ps1 | Invoke-Expression
 ```
 
 ### Step 3: Install Dot-Posh
