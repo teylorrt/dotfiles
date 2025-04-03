@@ -43,7 +43,7 @@ winget install --id Microsoft.PowerShell --source winget
 
 - Execute the following script to install OhMyPosh
 ```powershell
-Invoke-RestMethod https://raw.githubusercontent.com/teylorrt/dotposh/refs/heads/main/install-oh-my-posh.ps1 | Invoke-Expression
+Invoke-RestMethod https://raw.githubusercontent.com/teylorrt/dotposh/refs/heads/main/install/install-oh-my-posh.ps1 | Invoke-Expression
 ```
 
 ### Step 3: Install Dot-Posh
